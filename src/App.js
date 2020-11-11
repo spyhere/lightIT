@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router} from 'react-router-dom'
+import { useRoutes } from './routes'
+import { AuthContext } from './context/AuthContext'
+import { useAuth } from './hooks/useAuth'
+import { useCatalog } from './hooks/useCatalog'
+import { Loader } from './components/Loader'
+import { Navbar } from './components/Navbar'
+import './app.css'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { login, logout, token, ready } = useAuth()
+    const routes = useRoutes(!!token)
+
+    const { catalog, updateCatalog } = useCatalog()
+
+    if (!ready) {
+        return <Loader />
+    }
+
+
+    return(
+        <AuthContext.Provider value={{
+            token, login, logout, catalog, updateCatalog
+        }}>
+            <Router>
+                <Navbar />
+                <div className="container">
+                    {routes}
+                </div>
+            </Router>
+        </AuthContext.Provider>
+    )
 }
 
-export default App;
+export default App
