@@ -7,6 +7,10 @@
     box-shadow: inset 2px 1px 2px;
 }
 
+.auth__buttons {
+    text-decoration: underline;
+}
+
 .loader {
     display: flex;
     flex-direction: column;
@@ -20,13 +24,12 @@
 }
 
 .logo {
-    width: 66px;
-    border-radius: 5px;
-    transition-duration: 0.3s;
+    padding-top: 4px;
 }
 
 .logo:hover {
-    filter: brightness(1.2);
+    fill: #ede;
+    filter: drop-shadow(1px 1px 6px rgba(255,255,255,0.7));
 }
 
 .product {
@@ -35,18 +38,18 @@
     padding: 0 !important;
 }
 
+.product__img {
+    height: 150px !important;
+    width: auto !important;
+    margin: 0 auto;
+}
+
 .back_arrow {
     color: #000;
     font-size: 3em;
     cursor: pointer;
     position: fixed;
     left: 0;
-}
-
-.product__img {
-    height: 150px !important;
-    width: auto !important;
-    margin: 0 auto;
 }
 
 .description__img {
@@ -75,13 +78,13 @@
     margin: 1em;
 }
 
-
 .review-info {
     display: grid;
     grid-template: auto auto / 1fr 1fr;
     box-shadow: 2px 2px 3px #000 !important;
     margin-bottom: 4px !important;
 }
+
 .review-info > p {
     grid-column: 1 / 3;
     border-top: 1px solid rgba(0,0,0,0.3);
@@ -93,6 +96,34 @@
     cursor: pointer;
 }
 
-.colection__stars {
+.collection__stars {
     pointer-events: none;
+}
+
+.comment {
+    z-index: 9;
+}
+
+.comment__text {
+    padding: 10px !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    max-height: 6rem !important;
+    min-height: 3rem !important;
+}
+
+.blackout {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0);
+    animation: blackoutAnim 0.5s ease-in forwards; 
+}
+@keyframes blackoutAnim {
+    to {
+        background: rgba(0,0,0,0.3);
+    }
 }

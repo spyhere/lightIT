@@ -9,14 +9,16 @@ import { AuthContext } from '../context/AuthContext'
 export const CatalogPage = () => {
     const [catalog, setCatalog] = useState([])
     const { request, loading, error, clearError } = useHTTP()
-    const { updateCatalog } = useContext(AuthContext)
+    const { updateCatalog, link } = useContext(AuthContext)
     const message = useMessage()
 
-    
+    // Updating catalog list before mounting
     const newUpdCatalog = useCallback(async () => {
         try {
-            let data = await request('http://smktesting.herokuapp.com/api/products/')
+            let data = await request(link + 'api/products/')
             setCatalog(data)
+
+            // Sending refreshed list to context
             updateCatalog(data)
         } catch(e) {
             message(e.message)
@@ -32,14 +34,16 @@ export const CatalogPage = () => {
         return <Loader />
     }
 
+    // If HTTP request is done, catalog list is empty and we have error
     if (!catalog.length && !loading && error) {
         return (
             <div>
-                <h1 className="center-align">No content</h1>
+                <h2 className="center-align">No content</h2>
             </div>
         )
     }
 
+    // If catalog list isn't empty render a list
     return (
         <div className="catalog">
               <ProductList {...{catalog}} />  

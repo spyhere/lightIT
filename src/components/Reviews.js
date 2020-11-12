@@ -1,7 +1,7 @@
 import React from 'react'
 import { Vote } from './Vote'
 
-export const Review = ({reviews}) => {
+export const Reviews = ({reviews}) => {
         return (
             <>
             {reviews.map(item =>{ 
@@ -17,7 +17,8 @@ export const Review = ({reviews}) => {
                             </p>
                         </div>
                         
-                        <span className="colection__stars"><Vote rate={item.rate}/></span>
+                        {/* STARS */}
+                        <span className="collection__stars"><Vote rate={item.rate}/></span>
                         <p>{item.text}</p>
                 </li>
                 )}

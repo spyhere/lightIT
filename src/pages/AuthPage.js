@@ -5,11 +5,10 @@ import { useMessage } from '../hooks/useMessage'
 import { AuthContext } from '../context/AuthContext'
 
 
-const link = 'http://smktesting.herokuapp.com/api/'
 
 export const AuthPage = ({match}) => {
-    const { loading, error, request, clearError } = useHTTP()
-    const auth = useContext(AuthContext)
+    const { request } = useHTTP()
+    const { login, link } = useContext(AuthContext)
     const message = useMessage()
     const history = useHistory()
     const operation = match.params.auth
@@ -18,29 +17,35 @@ export const AuthPage = ({match}) => {
         username: "", password: ""
     })
 
+
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
 
+
     const loginHandler = async () => {
         try {
-            let response = await request(link + 'login/', 'POST', form)
-            auth.login(response)
+            let response = await request(link + 'api/login/', 'POST', form)
+            login(response)
             message('Successfully logged in')
+
+            // Redirect to catalog page after successful login in 0.5s
             setTimeout(() => history.push('/catalog'), 500)
-            
         } catch(e) {
             message(e.message)
         }
     }
 
+    
     const registerHandler = async () => {
         try {
-            let response = await request(link + 'register/', 'POST', form)
+            let response = await request(link + 'api/register/', 'POST', form)
             message(response.message)
             setForm({
                 username: "", password: ""
             })
+
+            // Redirecting to login page after successful registration
             history.push('/auth/log')
         } catch(e) {
             message(e.message)
@@ -74,6 +79,8 @@ export const AuthPage = ({match}) => {
                 </div>
             </div>
             <div className="row center-align section">
+
+                {/* Dependency on route 'auth/log' or 'auth/reg' */}
                 {operation === 'log' &&
                 <button 
                 className="btn waves-effect blue lighten-1" 

@@ -5,7 +5,7 @@ import { CatalogPage } from './pages/CatalogPage'
 import { ProductPage } from './pages/ProductPage'
 
 
-export const useRoutes = isAuthenticated => {
+export const useRoutes = ()=> {
         return (
             <Switch>
                 <Route path="/catalog" exact component={CatalogPage}/>

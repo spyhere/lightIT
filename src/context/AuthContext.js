@@ -9,5 +9,6 @@ export const AuthContext = createContext({
     login: empty,
     logout: empty,
     catalog: [],
-    updateCatalog: empty
+    updateCatalog: empty,
+    link: ''
 })

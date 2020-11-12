@@ -16,7 +16,7 @@ export const useHTTP = () => {
             const data = await response.json()
 
             
-            if (!response.ok || data.hasOwnProperty('success') && !data.success) {
+            if (!response.ok || (data.hasOwnProperty('success') && !data.success)) {
                 throw new Error(data.message || "Something went wrong")
             }
 

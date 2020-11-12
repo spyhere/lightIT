@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react'
 export const useAuth = () => {
     const [token, setToken] = useState(null)
     const [ready, setReady] = useState(null)
-    const [process, setProcess] = useState(false)
 
     const login = useCallback(data => {
         setToken(data.token)

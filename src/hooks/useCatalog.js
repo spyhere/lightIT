@@ -5,6 +5,6 @@ export const useCatalog = () => {
 
     const updateCatalog = useCallback(catalog => {
        if (catalog.length) setCatalog(catalog)
-    }, [])
+    }, [setCatalog])
     return { catalog, updateCatalog }
 }
